@@ -1,8 +1,10 @@
 class NodeDokter {
     Dokter data;
-    Node next;
+    NodeDokter next;
+    NodeDokter prev;
 
-    public NodeDokter(Dokter data) {
+    public NodeDokter(NodeDokter prev, Dokter data, NodeDokter next) {
+        this.prev = null;
         this.data = data;
         this.next = null;
     }
