@@ -13,8 +13,8 @@ public class Main {
             new Dokter("dr04", "Slamet Sugito")
         };
 
-        for (Dokter d : dataDokter) {
-            dataDokter.tambahDokter(d);
+        for (int i = 0; i < dataDokter.length; i++) {
+            dll.tambahDokter(dataDokter[i]);
         }
 
         int pilihan;
@@ -56,11 +56,11 @@ public class Main {
                     System.out.println();
                     break;
                 case 5:
-                    dll.cetak08();
+                    dll.cetak();
                     System.out.println();
                     break;
                 case 6:
-                    dll.cariId08();
+                    dll.sortDESC();
                     System.out.println();
                     break;
                 case 0:
