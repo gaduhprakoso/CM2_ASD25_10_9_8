@@ -48,7 +48,7 @@ public class Main {
                     System.out.println();
                     break;
                 case 3:
-                    dll.hapusData();
+                    dll.layaniPasien(sc);
                     System.out.println();
                     break;
                 case 4:

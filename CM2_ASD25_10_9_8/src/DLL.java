@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class DLL {
     NodePasien headPasien;
     NodeDokter headDokter;
@@ -43,7 +45,7 @@ public class DLL {
         }
     }
 
-    public void hapusData() { // 3. layani pasien
+    public void hapusDataPasien() { // 3. layani pasien
         if (isEmpty()) {
             System.out.println("Antrian kosong!");
         } else {
@@ -68,6 +70,57 @@ public class DLL {
             }
 
         }
+    }
+
+    public void layaniPasien(Scanner sc) { // menu 3
+        if (isEmpty()) {
+            System.out.println("Tidak ada pasien dalam antrian.");
+            return;
+        }
+
+        NodePasien pasienDilayani = headPasien;
+        System.out.println("Pasien " + pasienDilayani.data.nama + " dipanggil");
+
+        printDokter();
+        System.out.print("Input kode dokter: ");
+        String kode = sc.nextLine();
+
+        NodeDokter currentDokter = headDokter;
+        Dokter dokterTerpilih = null;
+        while (currentDokter != null) {
+            if (currentDokter.data.id.equalsIgnoreCase(kode)) {
+                dokterTerpilih = currentDokter.data;
+                break;
+            }
+            currentDokter = currentDokter.next;
+        }
+
+        if (dokterTerpilih == null) {
+            System.out.println("Dokter tidak ditemukan.");
+            return;
+        }
+
+        System.out.print("Input durasi layanan (jam): ");
+        int durasi = sc.nextInt();
+        sc.nextLine();
+
+        TransaksiLayanan transaksi = new TransaksiLayanan(pasienDilayani.data, dokterTerpilih, durasi);
+        transaksi.biaya = 50000;
+
+        NodeTransaksi newTrans = new NodeTransaksi(null, transaksi, null);
+        if (headTransaksi == null) {
+            headTransaksi = newTrans;
+        } else {
+            NodeTransaksi currentTransaksi = headTransaksi;
+            while (currentTransaksi.next != null) {
+                currentTransaksi = currentTransaksi.next;
+            }
+            currentTransaksi.next = newTrans;
+            newTrans.prev = currentTransaksi;
+        }
+
+        hapusDataPasien();
+        System.out.println(">> Pasien telah dilayani, transaksi berhasil dicatat");
     }
 
     public void printDokter() { // menu 3.Layani pasien
@@ -100,26 +153,27 @@ public class DLL {
             System.out.println(t.pasien.nama + "\t" + t.dokter.nama + "\t" + t.durasiLayanan + "\t" + t.hitungBiaya());
             current = current.next;
         }
-    }   
+    }
 
     public void sortDESC() { // menu 6
-    if (headTransaksi == null || headTransaksi.next == null) return;
+        if (headTransaksi == null || headTransaksi.next == null)
+            return;
 
-    boolean swapped;
-    do {
-        swapped = false;
-        NodeTransaksi current = headTransaksi;
-        while (current.next != null) {
-            if (current.data.durasiLayanan < current.next.data.durasiLayanan) {
-                TransaksiLayanan temp = current.data;
-                current.data = current.next.data;
-                current.next.data = temp;
-                swapped = true;
+        boolean swapped;
+        do {
+            swapped = false;
+            NodeTransaksi current = headTransaksi;
+            while (current.next != null) {
+                if (current.data.durasiLayanan < current.next.data.durasiLayanan) {
+                    TransaksiLayanan temp = current.data;
+                    current.data = current.next.data;
+                    current.next.data = temp;
+                    swapped = true;
+                }
+                current = current.next;
             }
-            current = current.next;
-        }
-    } while (swapped);
+        } while (swapped);
 
-    cetak(); 
-}
+        cetak();
+    }
 }
