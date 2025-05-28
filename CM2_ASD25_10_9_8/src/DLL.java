@@ -19,7 +19,7 @@ public class DLL {
             while (current.next != null) {
                 current = current.next;
             }
-            NodePasien newNode = new NodePasien(current, nomor, nama, null);
+            NodePasien newNode = new NodePasien(current, item, null);
             current.next = newNode;
         }
         size++;
@@ -29,7 +29,7 @@ public class DLL {
         if (isEmpty()) {
             System.out.println("Antrian kosong!");
         } else {
-            System.out.println(head.nama + " telah selesai divaksinasi.");
+            System.out.println(head.data.nama + " telah selesai divaksinasi.");
             head = head.next;
             if (head != null)
                 head.prev = null;
@@ -42,7 +42,7 @@ public class DLL {
             System.out.println("Tidak ada data dalam antrian.");
         } else {
             System.out.println("Daftar Pengantre Vaksin");
-            System.out.printf("%-10s%-15s\n", "Nomor", "Nama");
+            System.out.println("Nomor \t Nama");
             NodePasien current = head;
             while (current != null) {
                 current.data.tampilkanDataPasien();
