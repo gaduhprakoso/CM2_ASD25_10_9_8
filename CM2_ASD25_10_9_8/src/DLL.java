@@ -1,58 +1,62 @@
 public class DLL {
-    NodePasien head;
+    NodePasien headPasien;
+    NodeDokter headDokter;
+    NodeTransaksi headTransaksi;
     int size;
 
     public DLL() {
-        head = null;
+        headPasien = null;
         size = 0;
     }
 
     public boolean isEmpty() {
-        return head == null;
+        return headPasien == null;
     }
 
-    public void tambahData(Pasien item) {
+    public void tambahData(Pasien item) { // menu 1.tambah pasien ke antrian
         if (isEmpty()) {
-            head = new NodePasien(null, item, null);
+            headPasien = new NodePasien(null, item, null);
         } else {
-            NodePasien current = head;
+            NodePasien current = headPasien;
             while (current.next != null) {
                 current = current.next;
             }
-            NodePasien newNode = new NodePasien(current, nomor, nama, null);
+            NodePasien newNode = new NodePasien(current, item, null);
             current.next = newNode;
         }
         size++;
+        System.out.println("Pasien Masuk ke dalam Antrian");
     }
 
-    public void hapusData() {
+    public void hapusData() { // 3. layani pasien
         if (isEmpty()) {
             System.out.println("Antrian kosong!");
         } else {
-            System.out.println(head.nama + " telah selesai divaksinasi.");
-            head = head.next;
-            if (head != null)
-                head.prev = null;
+            System.out.println(headPasien.data.nama + " telah selesai divaksinasi.");
+            headPasien = headPasien.next;
+            if (headPasien != null)
+                headPasien.prev = null;
             size--;
         }
     }
 
-    public void print() {
+    public void print() { //menu 2.lihat antrian
         if (isEmpty()) {
             System.out.println("Tidak ada data dalam antrian.");
         } else {
-            System.out.println("Daftar Pengantre Vaksin");
-            System.out.printf("%-10s%-15s\n", "Nomor", "Nama");
-            NodePasien current = head;
+            System.out.println("--Antrien Pasien--");
+            System.out.println("Nama \t NIK \t Keluhan");
+            NodePasien current = headPasien;
             while (current != null) {
                 current.data.tampilkanDataPasien();
                 current = current.next;
             }
-            System.out.println("Sisa Antrian: " + size);
+
         }
     }
 
-    public int getSize() {
-        return size;
+    public void getSize() { //menu 4.cek sisa pasien
+        System.out.println("Sisa Antrian: " + size);
+        return;
     }
 }
