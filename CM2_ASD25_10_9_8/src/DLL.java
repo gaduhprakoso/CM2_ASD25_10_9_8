@@ -6,9 +6,10 @@ public class DLL {
 
     public DLL() {
         headPasien = null;
+        headDokter = null;
+        headTransaksi = null;
         size = 0;
     }
-    
 
     public boolean isEmpty() {
         return headPasien == null;
@@ -29,8 +30,8 @@ public class DLL {
         System.out.println("Pasien Masuk ke dalam Antrian");
     }
 
-    public void tambahDokter(Dokter data) { //isi data dokter
-        NodeDokter baru = new NodeDokter(null ,data, null);
+    public void tambahDokter(Dokter data) { // isi data dokter
+        NodeDokter baru = new NodeDokter(null, data, null);
         if (headDokter == null) {
             headDokter = baru;
         } else {
@@ -54,7 +55,7 @@ public class DLL {
         }
     }
 
-    public void printPasien() { //menu 2.lihat antrian
+    public void printPasien() { // menu 2.lihat antrian
         if (isEmpty()) {
             System.out.println("Tidak ada data dalam antrian.");
         } else {
@@ -69,7 +70,7 @@ public class DLL {
         }
     }
 
-    public void printDokter() { //menu 3.Layani pasien
+    public void printDokter() { // menu 3.Layani pasien
         if (isEmpty()) {
             System.out.println("Tidak ada data dalam antrian.");
         } else {
@@ -84,8 +85,41 @@ public class DLL {
         }
     }
 
-    public void getSize() { //menu 4.cek sisa pasien
+    public void getSize() { // menu 4.cek sisa pasien
         System.out.println("Sisa Antrian: " + size);
         return;
     }
+
+    public void cetak() { // menu 5 dan 6
+        System.out.println("-- Riwayat Transaksi --");
+        System.out.println("Nama\tNama Dokter\tDurasi\tTotal");
+
+        NodeTransaksi current = headTransaksi;
+        while (current != null) {
+            TransaksiLayanan t = current.data;
+            System.out.println(t.pasien.nama + "\t" + t.dokter.nama + "\t" + t.durasiLayanan + "\t" + t.hitungBiaya());
+            current = current.next;
+        }
+    }   
+
+    public void sortDESC() { // menu 6
+    if (headTransaksi == null || headTransaksi.next == null) return;
+
+    boolean swapped;
+    do {
+        swapped = false;
+        NodeTransaksi current = headTransaksi;
+        while (current.next != null) {
+            if (current.data.durasiLayanan < current.next.data.durasiLayanan) {
+                TransaksiLayanan temp = current.data;
+                current.data = current.next.data;
+                current.next.data = temp;
+                swapped = true;
+            }
+            current = current.next;
+        }
+    } while (swapped);
+
+    cetak(); 
+}
 }
