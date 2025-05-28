@@ -2,7 +2,8 @@ class TransaksiLayanan {
 
     Pasien pasien;
     Dokter dokter;
-    int durasiLayanan, biaya;
+    int durasiLayanan;
+    double biaya = 50.000;
 
     public TransaksiLayanan(Pasien pasien, Dokter dokter, int durasiLayanan) {
         this.pasien = pasien;
@@ -10,8 +11,8 @@ class TransaksiLayanan {
         this.durasiLayanan = durasiLayanan;
     }
 
-    int hitungBiaya() {
-        int totalBayar = durasiLayanan * biaya;
+    public double hitungBiaya() {
+        double totalBayar = durasiLayanan * biaya;
         return totalBayar;
     }
 }
