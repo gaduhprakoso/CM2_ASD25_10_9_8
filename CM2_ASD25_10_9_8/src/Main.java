@@ -5,12 +5,12 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         DLL dll = new DLL();
-
+    
         Dokter[] dataDokter = {
-                new Dokter("dr01", "Wike Ratanca"),
-                new Dokter("dr02", "Santi Runica"),
-                new Dokter("dr03", "Aam Antanica"),
-                new Dokter("dr04", "Slamet Sugito")
+            new Dokter("dr01", "Wike Ratanca"),
+            new Dokter("dr02", "Santi Runica"),
+            new Dokter("dr03", "Aam Antanica"),
+            new Dokter("dr04", "Slamet Sugito")
         };
 
         for (Dokter d : dataDokter) {
@@ -52,15 +52,15 @@ public class Main {
                     System.out.println();
                     break;
                 case 4:
-                    list.getSize();
+                    dll.getSize();
                     System.out.println();
                     break;
                 case 5:
-                    list.cetak08();
+                    dll.cetak08();
                     System.out.println();
                     break;
                 case 6:
-                    list.cariId08();
+                    dll.cariId08();
                     System.out.println();
                     break;
                 case 0:
@@ -73,3 +73,4 @@ public class Main {
         } while (pilihan != 0);
     }
 }
+    
