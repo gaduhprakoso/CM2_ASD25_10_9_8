@@ -17,21 +17,6 @@ public class DLL {
         return headPasien == null;
     }
 
-    public void tambahData(Pasien item) { // menu 1.tambah pasien ke antrian
-        if (isEmpty()) {
-            headPasien = new NodePasien(null, item, null);
-        } else {
-            NodePasien current = headPasien;
-            while (current.next != null) {
-                current = current.next;
-            }
-            NodePasien newNode = new NodePasien(current, item, null);
-            current.next = newNode;
-        }
-        size++;
-        System.out.println("Pasien Masuk ke dalam Antrian");
-    }
-
     public void tambahDokter(Dokter data) { // isi data dokter
         NodeDokter baru = new NodeDokter(null, data, null);
         if (headDokter == null) {
@@ -45,16 +30,19 @@ public class DLL {
         }
     }
 
-    public void hapusDataPasien() { // 3. layani pasien
+    public void tambahData(Pasien item) { // menu 1.tambah pasien ke antrian
         if (isEmpty()) {
-            System.out.println("Antrian kosong!");
+            headPasien = new NodePasien(null, item, null);
         } else {
-            System.out.println(headPasien.data.nama + " telah selesai divaksinasi.");
-            headPasien = headPasien.next;
-            if (headPasien != null)
-                headPasien.prev = null;
-            size--;
+            NodePasien current = headPasien;
+            while (current.next != null) {
+                current = current.next;
+            }
+            NodePasien newNode = new NodePasien(current, item, null);
+            current.next = newNode;
         }
+        size++;
+        System.out.println(">> Pasien Masuk ke dalam Antrian");
     }
 
     public void printPasien() { // menu 2.lihat antrian
@@ -72,7 +60,7 @@ public class DLL {
         }
     }
 
-    public void layaniPasien(Scanner sc) { // menu 3
+    public void layaniPasien(Scanner sc) { // 3. Layani Pasien
         if (isEmpty()) {
             System.out.println("Tidak ada pasien dalam antrian.");
             return;
@@ -82,6 +70,7 @@ public class DLL {
         System.out.println("Pasien " + pasienDilayani.data.nama + " dipanggil");
 
         printDokter();
+        System.out.println();
         System.out.print("Input kode dokter: ");
         String kode = sc.nextLine();
 
@@ -107,23 +96,34 @@ public class DLL {
         TransaksiLayanan transaksi = new TransaksiLayanan(pasienDilayani.data, dokterTerpilih, durasi);
         transaksi.biaya = 50000;
 
-        NodeTransaksi newTrans = new NodeTransaksi(null, transaksi, null);
+        NodeTransaksi transaksiBaru = new NodeTransaksi(null, transaksi, null);
         if (headTransaksi == null) {
-            headTransaksi = newTrans;
+            headTransaksi = transaksiBaru;
         } else {
             NodeTransaksi currentTransaksi = headTransaksi;
             while (currentTransaksi.next != null) {
                 currentTransaksi = currentTransaksi.next;
             }
-            currentTransaksi.next = newTrans;
-            newTrans.prev = currentTransaksi;
+            currentTransaksi.next = transaksiBaru;
+            transaksiBaru.prev = currentTransaksi;
         }
 
         hapusDataPasien();
         System.out.println(">> Pasien telah dilayani, transaksi berhasil dicatat");
     }
 
-    public void printDokter() { // menu 3.Layani pasien
+    public void hapusDataPasien() { // bagian 3
+        if (isEmpty()) {
+            System.out.println("Antrian kosong!");
+        } else {
+            headPasien = headPasien.next;
+            if (headPasien != null)
+                headPasien.prev = null;
+            size--;
+        }
+    }
+
+    public void printDokter() { // bagian 3
         if (isEmpty()) {
             System.out.println("Tidak ada data dalam antrian.");
         } else {
@@ -164,7 +164,7 @@ public class DLL {
             swapped = false;
             NodeTransaksi current = headTransaksi;
             while (current.next != null) {
-                if (current.data.durasiLayanan < current.next.data.durasiLayanan) {
+                if (current.data.pasien.nama.compareToIgnoreCase(current.next.data.pasien.nama) < 0) {
                     TransaksiLayanan temp = current.data;
                     current.data = current.next.data;
                     current.next.data = temp;

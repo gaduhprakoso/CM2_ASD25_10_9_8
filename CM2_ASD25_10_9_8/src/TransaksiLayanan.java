@@ -3,7 +3,7 @@ class TransaksiLayanan {
     Pasien pasien;
     Dokter dokter;
     int durasiLayanan;
-    double biaya = 50.000;
+    double biaya;
 
     public TransaksiLayanan(Pasien pasien, Dokter dokter, int durasiLayanan) {
         this.pasien = pasien;
