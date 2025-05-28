@@ -94,7 +94,6 @@ public class DLL {
         sc.nextLine();
 
         TransaksiLayanan transaksi = new TransaksiLayanan(pasienDilayani.data, dokterTerpilih, durasi);
-        transaksi.biaya = 50000;
 
         NodeTransaksi transaksiBaru = new NodeTransaksi(null, transaksi, null);
         if (headTransaksi == null) {
