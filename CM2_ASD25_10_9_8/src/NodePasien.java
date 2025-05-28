@@ -7,5 +7,4 @@ public class NodePasien {
         this.data = data;
         this.next = next;
     }
-
 }

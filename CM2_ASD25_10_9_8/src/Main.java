@@ -1,20 +1,21 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        DLL dllDokter = new DLL();
-        DLL dllPasien = new DLL();
-    
+        Scanner sc = new Scanner(System.in);
+
+        DLL dll = new DLL();
+
         Dokter[] dataDokter = {
-            new Dokter("dr01", "Wike Ratanca"),
-            new Dokter("dr02", "Santi Runica"),
-            new Dokter("dr03", "Aam Antanica"),
-            new Dokter("dr04", "Slamet Sugito")
+                new Dokter("dr01", "Wike Ratanca"),
+                new Dokter("dr02", "Santi Runica"),
+                new Dokter("dr03", "Aam Antanica"),
+                new Dokter("dr04", "Slamet Sugito")
         };
 
         for (Dokter d : dataDokter) {
-            daftarDokter.tambah(d);
+            dataDokter.tambahDokter(d);
         }
-
-        Scanner sc = new Scanner(System.in);
 
         int pilihan;
         do {
@@ -39,15 +40,15 @@ public class Main {
                     System.out.print("Keluhan : ");
                     String keluhan = sc.nextLine();
                     Pasien list = new Pasien(nama, nik, keluhan);
-                    dllPasien.tambahData(list); 
+                    dll.tambahData(list);
                     System.out.println();
                     break;
                 case 2:
-                    list.printPasien();
+                    dll.printPasien();
                     System.out.println();
                     break;
                 case 3:
-                    list.hapusData();
+                    dll.hapusData();
                     System.out.println();
                     break;
                 case 4:
@@ -69,8 +70,6 @@ public class Main {
                     System.out.println("Pilihan tidak valid.");
                     System.out.println();
             }
-        } while (pilihan!=0);
+        } while (pilihan != 0);
     }
 }
-    
-
