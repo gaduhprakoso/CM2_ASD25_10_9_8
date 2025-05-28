@@ -40,7 +40,7 @@ public class DLL {
         }
     }
 
-    public void print() { //menu 2.lihat antrian
+    public void printPasien() { //menu 2.lihat antrian
         if (isEmpty()) {
             System.out.println("Tidak ada data dalam antrian.");
         } else {
@@ -49,6 +49,21 @@ public class DLL {
             NodePasien current = headPasien;
             while (current != null) {
                 current.data.tampilkanDataPasien();
+                current = current.next;
+            }
+
+        }
+    }
+
+    public void printDokter() { //menu 3.Layani pasien
+        if (isEmpty()) {
+            System.out.println("Tidak ada data dalam antrian.");
+        } else {
+            System.out.println("--Antrien Pasien--");
+            System.out.println("Kode \t Nama");
+            NodePasien current = headDokter;
+            while (current != null) {
+                current.data.tampil();
                 current = current.next;
             }
 
