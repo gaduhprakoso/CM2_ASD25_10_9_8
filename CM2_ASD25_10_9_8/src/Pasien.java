@@ -9,8 +9,6 @@ public class Pasien {
         this.keluhan = keluhan;
     }
     public void tampilkanDataPasien(){
-        System.out.println("Nama: " + nama);
-        System.out.println("NIK: " + nik);
-        System.out.println("Keluhan: " + keluhan);
+        System.out.println(nama +"\t"+ nik + "\t"+ keluhan);
     }
 }

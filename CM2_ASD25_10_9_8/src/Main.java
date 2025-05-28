@@ -33,6 +33,7 @@ public class Main {
 
             switch (pilihan) {
                 case 1:
+                    System.out.println();
                     System.out.print("Input Nama Pasien : ");
                     String nama = sc.nextLine();
                     System.out.print("NIK : ");
@@ -44,6 +45,7 @@ public class Main {
                     System.out.println();
                     break;
                 case 2:
+                    System.out.println();
                     dll.printPasien();
                     System.out.println();
                     break;
