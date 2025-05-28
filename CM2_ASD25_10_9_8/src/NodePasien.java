@@ -1,7 +1,6 @@
 public class NodePasien {
     Pasien data;
-    NodePasien prev;
-    NodePasien next;
+    NodePasien prev, next;
 
     public NodePasien(NodePasien prev, Pasien data, NodePasien next){
         this.prev = prev;
