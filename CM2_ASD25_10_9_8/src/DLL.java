@@ -8,6 +8,7 @@ public class DLL {
         headPasien = null;
         size = 0;
     }
+    
 
     public boolean isEmpty() {
         return headPasien == null;
@@ -26,6 +27,19 @@ public class DLL {
         }
         size++;
         System.out.println("Pasien Masuk ke dalam Antrian");
+    }
+
+    public void tambahDokter(Dokter data) { //isi data dokter
+        NodeDokter baru = new NodeDokter(null ,data, null);
+        if (headDokter == null) {
+            headDokter = baru;
+        } else {
+            NodeDokter current = headDokter;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = baru;
+        }
     }
 
     public void hapusData() { // 3. layani pasien
@@ -59,9 +73,9 @@ public class DLL {
         if (isEmpty()) {
             System.out.println("Tidak ada data dalam antrian.");
         } else {
-            System.out.println("--Antrien Pasien--");
+            System.out.println("--daftar Dokter jaga--");
             System.out.println("Kode \t Nama");
-            NodePasien current = headDokter;
+            NodeDokter current = headDokter;
             while (current != null) {
                 current.data.tampil();
                 current = current.next;
